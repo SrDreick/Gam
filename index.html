@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAM - Página de Eventos</title>
+
+    <!-- CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">   
+    <!-- Scripts de Bootstrap (incluye jQuery y Popper.js) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        .text2 {
+            font-family: "roboto",sans-serif
+        }
+        .header {
+            background-color: #4a0033;
+            padding: 10px;
+            
+            color: white;
+        }
+        .header-logo {
+            font-size: 2em;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        
+        /* Estilos para el contenedor de video y el texto */
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 550px;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .overlay-text-bottom {
+            position: absolute;
+            bottom: 20px;
+            left: 200px; /* Ajustado para alinear a la izquierda */
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            text-align: left; /* Alineación del texto a la izquierda */
+            font-family: "Roboto", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+            
+            padding: 10px 20px;
+            border-radius: 5px;
+            max-width: 80%; /* Limitar el ancho para que el texto no ocupe todo el video */
+        }
+        .btn-custom {
+            color: white;
+            border: 2px solid white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .btn-custom:hover {
+            background-color: white;
+            color: #4a0033;
+            text-decoration: none;
+        }
+        .header-logo img {
+            height: 500px;
+        }
+        --- 
+        .navbar-brand img {
+    height: 60px; /* Ajusta el tamaño según sea necesario */
+}
+
+/* Opcional: Estilo de los enlaces */
+.nav-link {
+    color: white !important;
+    font-weight: bold;
+    margin-right: 110px;
+    font-size: 20px
+}
+
+.nav-link:hover {
+    color: #d90c6e !important; /* Cambia el color de hover */
+}
+/* Estilos para las tarjetas de eventos */
+.event-card {
+            background-color: #bdccd4;
+            border-radius: 20px;
+            width: 250px;
+            
+            margin: 10px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el efecto de zoom */
+        }
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #000; /* Fondo negro para simular imagen */
+        }
+        .event-title {
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            padding: 2px 15px;
+            text-align: left;
+            
+        }
+        .event-date {
+            
+            padding: 2px 15px;
+            text-align: left;
+            
+        }
+
+        .event-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border-radius: 30px;
+            margin: 5px 0;
+        }
+        .badge-free {
+            background-color: green;
+            color: white;
+        }
+        .badge-paid {
+            background-color: #0066cc;
+            color: white;
+        }
+        .badge-promo {
+            background-color: #d90c6e;
+            color: white;
+        }
+        .badge-event {
+            background-color: #000000;
+            color: white;
+            
+        }
+
+        /* Contenedor de las tarjetas */
+        .event-cards-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        .event-card:hover {
+        transform: scale(1.1); /* Agranda la tarjeta */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Intensifica la sombra */
+    }
+    </style>
+</head>
+<body>
+
+<!-- Encabezado -->
+<header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #4a0033;">
+        <!-- Logotipo -->
+        <a class="navbar-brand" href="#">
+            <img src="Recurso 4.png" alt="Logotipo de GAM" style="height: 30px;">
+        </a>
+
+        <!-- Botón de Toggle para dispositivos móviles -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú de navegación -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Somos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Hacemos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Tu visita</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Apóyanos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Foro</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+
+    <!-- Carrusel de videos -->
+    <div id="eventCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Primer video -->
+            <div class="carousel-item active">
+                <div class="video-container">
+                    <video autoplay muted loop>
+                        <source src="videogam1.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="overlay-text-bottom text2">
+                        UN CENTRO CULTURAL CONTEMPORÁNEO,<br>UBICADO EN UN EDIFICIO HISTÓRICO EN EL <br> <br2>CORAZÓN DE SANTIAGO
+                        <br2>
+                        <div><a href="#" class="btn-custom">Ver más →</a></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Segundo video -->
+            <div class="carousel-item">
+                <div class="video-container">
+                    <video autoplay muted loop>
+                        <source src="videogam2.mp4" type="video/mp4">
+                        Tu navegador no soporta el video.
+                    </video>
+                    <div class="overlay-text-bottom">
+                        DE OCTUBRE A DICIEMBRE, SOLO<br>HERMOSOS RUIDOS EN GAM
+                        <br><a href="#" class="btn-custom">Ver más →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Controles del carrusel -->
+        <a class="carousel-control-prev" href="#eventCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#eventCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Siguiente</span>
+        </a>
+    </div>
+    <div class="event-cards-container">
+        <!-- Tarjeta 1 -->
+        <div class="event-card">
+            <img src="event1.png" alt="Imagen de evento">
+            <div class="event-title">Verbatim</div>
+            <div class="event-date">25 Oct al 10 Nov 2024</div>
+            <div class="event-badge badge-free">Gratis</div>
+            <div class="event-badge badge-event">Teatro</div>
+        </div>
+        <!-- Tarjeta 2 -->
+        <div class="event-card">
+            <img src="Event2.png" alt="Imagen de evento">
+            <div class="event-title">GEA</div>
+            <div class="event-date">2 al 10 Nov 2024</div>
+            <div class="event-badge badge-free">Gratis</div>
+            <div class="event-badge badge-event">Danza</div>
+        </div>
+        <!-- Tarjeta 3 -->
+        <div class="event-card">
+            <img src="Event3.png" alt="Imagen de evento">
+            <div class="event-title">BiblioGAM Lee</div>
+            <div class="event-date">2 Nov 2024</div>
+            <div class="event-badge badge-free">Gratis</div>
+            <div class="event-badge badge-event">Actividades</div>
+        </div>
+        <!-- Tarjeta 4 -->
+        <div class="event-card">
+            <img src="Event4.png" alt="Imagen de evento">
+            <div class="event-title">Pensar la música desde...</div>
+            <div class="event-date">Desde el 30 Oct 2024</div>
+            <div class="event-badge badge-free">Gratis</div>
+            <div class="event-badge badge-event">Música</div>
+            <div class="event-badge badge-event">Podcast</div>
+        </div>
+        <!-- Tarjeta 5 -->
+        <div class="event-card">
+            <img src="Event5.png" alt="Imagen de evento">
+            <div class="event-title">Centenario Patricio Bunster</div>
+            <div class="event-date">2 Nov 2024</div>
+            <div class="event-badge badge-paid">$8000</div>
+            <div class="event-badge badge-event">Danza</div>
+            <div class="event-badge badge-event">Actividades</div>
+        </div>
+        <!-- Tarjeta 6 -->
+        <div class="event-card">
+            <img src="Event6.png" alt="Imagen de evento">
+            <div class="event-title">Sprinter</div>
+            <div class="event-date">17 Oct al 3 Nov 2024</div>
+            <div class="event-badge badge-promo">2x1</div>
+            <div class="event-badge badge-event">Teatro</div>
+            <div class="event-badge badge-event">Actividades</div>
+        </div>
+    </div>
+    
+    <!-- Scripts de Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
